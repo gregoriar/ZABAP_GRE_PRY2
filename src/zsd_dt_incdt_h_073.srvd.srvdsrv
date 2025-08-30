@@ -1,0 +1,4 @@
+@EndUserText.label: 'History Incident Service Definition'
+define service ZSD_DT_INCDT_H_073 {
+  expose ZC_DT_INCDT2_H_073 as HistoryIncident;
+}

@@ -1,0 +1,61 @@
+@Metadata.layer: #CORE
+
+@UI: { headerInfo : { typeName: 'History Incident',
+                      typeNamePlural: 'History Incidents',
+                      title: { type: #STANDARD,
+                               value: 'HisUuid' } },
+                               
+      presentationVariant: [ {  sortOrder: [ { by: 'HisUuid',
+                                               direction: #ASC } ],
+                                visualizations: [ { type: #AS_LINEITEM  } ]  } ]
+
+}
+
+annotate entity ZC_DT_INCDT2_H_073 with
+    
+{
+  @UI.facet: [{ id: 'IncidentMasterData',
+                purpose: #STANDARD,
+                type:#LINEITEM_REFERENCE ,
+                label: 'Incident History' ,
+                position: 10 }]
+  @UI.hidden: true
+      HisUuid;
+
+    @UI: { lineItem: [{ position: 10,
+                   importance: #HIGH,
+                   label: 'Incident ID' }]  }   
+   IncUuid;
+
+   @UI: { lineItem: [{ position: 20,
+                   importance: #HIGH,
+                   label: 'His Incdt.' }] } 
+    HisId;
+ 
+    @UI: { lineItem: [{ position: 30,
+                   importance: #MEDIUM,
+                   label: 'Status Prev.' }] }     
+      PreviousStatus;
+ 
+    @UI: { lineItem: [{ position: 40,
+                   importance: #MEDIUM,
+                   label: 'New Status' }] }       
+      NewStatus;
+
+     @UI: { lineItem: [{ position: 40,
+                   importance: #MEDIUM,
+                   label: 'Text .' }] }       
+     Text;
+
+
+ @UI.hidden: true
+     LastChangedAt;
+  @UI.hidden: true    
+        LocalLastChangedAt;
+ 
+//      LocalCreatedBy;
+//      LocalCreatedAt;
+//      LocalLastChangedBy;
+ 
+    
+}
