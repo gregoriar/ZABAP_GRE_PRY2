@@ -31,7 +31,7 @@ CLASS zcl_load_inc_data_073 IMPLEMENTATION.
                                                  ( status_code = 'CO'
                                                    status_description = 'Completed' )
                                                  ( status_code = 'CL'
-                                                   status_description = 'Closed-In annotations' )
+                                                   status_description = 'Closed' )
                                                  ( status_code = 'EP'
                                                    status_description = 'On hold for materials' )
                                                  ( status_code = 'CN'
@@ -95,34 +95,34 @@ CLASS zcl_load_inc_data_073 IMPLEMENTATION.
                                                      inc_uuid         = 1
 
                                                      his_id           = 1
-                                                     previous_status  = 'OP'
-                                                     new_status       = 'IP'
-                                                     text             =  'Se inicia trabajo con faltanta de dos materiales MM1 , MM8'
+                                                     previous_status  = ''
+                                                     new_status       = 'OP'
+                                                     text             =  'First Incident'
                                                                           )
 
                                                   (  his_uuid         = 2
                                                      inc_uuid         = 1
 
                                                      his_id           = 2
-                                                     previous_status  = 'IP'
+                                                     previous_status  = 'OP'
                                                      new_status       = 'PE'
-                                                     text             =  'En espera de materiales. No se puede avanzar'
+                                                     text             =  'En espera de materiales. No se puede iniciar'
                                                                           )
 
                                                   (  his_uuid         = 3
                                                      inc_uuid         = 2
 
                                                      his_id           = 3
-                                                     previous_status  = 'OP'
-                                                     new_status       = 'PE'
-                                                     text             =  'En espera de Técnico especialista'
+                                                     previous_status  = ''
+                                                     new_status       = 'OP'
+                                                     text             =  'First Incident'
                                                                           )
 
                                                    (  his_uuid         = 4
                                                       inc_uuid         = 2
 
                                                      his_id            = 4
-                                                     previous_status  = 'PE'
+                                                     previous_status  = 'OP'
                                                      new_status       = 'PE'
                                                      text             =  'Continua en espera de asignación de Técnico Especialista'
                                                                           )
@@ -132,9 +132,9 @@ CLASS zcl_load_inc_data_073 IMPLEMENTATION.
                                                        inc_uuid         = 2
 
                                                       his_id            = 5
-                                                     previous_status  = 'PE'
-                                                     new_status       = 'IP'
-                                                     text             =  'Asignación de Técnico Especialista'
+                                                      previous_status  = 'PE'
+                                                      new_status       = 'IP'
+                                                      text             =  'Asignación de Técnico Especialista'
                                                                           )
 
 

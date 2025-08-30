@@ -1,0 +1,101 @@
+@Metadata.layer: #CORE
+//CORE es la layer más baja y se pueden ir agregando capas más altas ( manejamos capas en apps estandard )
+
+@UI: { headerInfo : { typeName: 'Main Incident',
+                      typeNamePlural: 'Main Incidents',
+                      title: { type: #STANDARD,
+                               value: 'IncidentId' } },
+      presentationVariant: [ {  sortOrder: [ { by: 'IncidentId',
+                                               direction: #ASC } ],
+                                visualizations: [ { type: #AS_LINEITEM  } ]  } ]
+
+
+}
+
+annotate entity ZC_DT_INCDT_073 with
+{
+
+  @UI.facet: [{ id: 'IncidentMasterData',
+                purpose: #STANDARD,
+                type:#IDENTIFICATION_REFERENCE,
+                label: 'Incident Master Data' ,
+                position: 10 }]
+  @UI.hidden: true
+  IncUuid;
+
+  @UI: { lineItem: [{ position: 10,
+                   importance: #HIGH,
+                   label: 'Incident ID' },
+  //En esta sección del lineItem  se definen los btns que aparecen antes del encabezados de las columnas
+  //estos btns aparecen antes de los btns del estandard
+                   { type: #FOR_ACTION,
+                     dataAction: 'changeStatus',
+                      label: 'Chage Status',
+                      position: 10 }],
+                  selectionField: [{ position: 10  }] ,
+  //Definimos el btn Z en la sección del INDENTIFICATION_REFERENCE, i.e. en la sección de la ventana de
+  //edición del detalle de incidencias, este btn aparecerá despues de los bts del estandard CRUD
+                 identification: [ { position: 10 },
+                     { type: #FOR_ACTION,
+                     dataAction: 'changeStatus',
+                      label: 'Chage Status',
+                      position: 10 }] }
+  IncidentId;
+
+  @UI.lineItem: [{ position: 20,
+                   importance: #MEDIUM }]
+  @UI.identification: [ { position: 20 }]
+
+  //         label: 'Incident ID' }]
+  Title;
+
+  @UI: { lineItem: [{ position: 30,
+                   importance: #LOW}],
+         selectionField: [{ position: 20  }],
+         identification: [ { position: 30 } ]   }
+  Description;
+
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZDD_STATUS2_VH_073',
+                                                 element: 'StatusCode' } }]
+                                          //       useForValidation: true
+  @UI: {  lineItem: [{ position: 40,
+                   importance: #LOW }],
+         selectionField: [{ position: 30  }],
+         identification: [ { position: 40 } ]   }
+  //         textArrangement:#TEXT_ONLY  }
+  Status;
+
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZDD_PRIORI_VH_073',
+                                                 element: 'PriorityCode' } ,
+                                                 useForValidation: true }]
+  @UI: { lineItem: [{ position: 50,
+                   importance: #LOW }],
+         selectionField: [{ position: 40  }],
+         identification: [ { position: 50 } ]   }
+  Priority;
+
+  @UI: { lineItem: [{ position: 60,
+                  importance: #LOW}],
+        selectionField: [{ position: 50  }],
+        identification: [ { position: 60 } ]   }
+  CreationDate;
+
+  @UI: { lineItem: [{ position: 70,
+                  importance: #LOW}],
+        selectionField: [{ position: 60  }],
+        identification: [ { position: 70 } ]   }
+  ChangedDate;
+
+
+  @UI.hidden: true
+  LastChangedAt;
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+
+  //      /* Associations */
+  //      _History : redirected to composition child zc_dt_inct_h_lgl
+
+
+
+}

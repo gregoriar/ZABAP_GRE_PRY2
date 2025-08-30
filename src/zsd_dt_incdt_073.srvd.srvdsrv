@@ -1,0 +1,4 @@
+@EndUserText.label: 'Main Incident Service Definition'
+define service ZSD_DT_INCDT_073 {
+  expose ZC_DT_INCDT_073 as Incidents;
+}
