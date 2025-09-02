@@ -1,0 +1,64 @@
+managed implementation in class zbp_r_dt_inct_073 unique;
+strict ( 2 ); //Asegura que el código cumple con la versión 2 del BDL (Behavior Definition Language)
+
+define behavior for ZR_DT_INCT_073 alias Incidents //alias <alias_name>
+persistent table zdt_inct_user073
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly ) IncUuid;
+  association _HistoryIncidents { create; }
+
+  mapping for zdt_inct_user073
+    {
+      IncUuid            = inc_uuid;
+      IncidentId         = incident_id;
+      Title              = title;
+      Description        = description;
+      Status             = status;
+      Priority           = priority;
+      CreationDate       = creation_date;
+      ChangedDate        = changed_date;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+
+} //Mapeo de la tabla zdt_inct_user073
+
+// Behavior Definition for ZDD_INCT_H_073
+define behavior for ZDD_INCT_H_073 alias HistoryIncidents //alias <alias_name>
+persistent table zdt_inct_h_073
+lock dependent by  _IncidentsMain
+authorization dependent by _IncidentsMain
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) HisUuid, IncUuid;
+  association _IncidentsMain;
+
+  mapping for zdt_inct_h_073
+    {
+      HisUuid            = his_uuid;
+      IncUuid            = inc_uuid;
+      HisId              = his_id;
+      PreviousStatus     = previous_status;
+      NewStatus          = new_status;
+      Text               = text;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+
+
+
+}
