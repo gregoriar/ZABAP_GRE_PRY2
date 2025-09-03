@@ -4,14 +4,32 @@ strict ( 2 ); //Asegura que el código cumple con la versión 2 del BDL (Behavio
 define behavior for ZR_DT_INCT_073 alias Incidents //alias <alias_name>
 persistent table zdt_inct_user073
 lock master
-authorization master ( instance )
-//etag master <field_name>
+//total etag LastChangedAt
+etag master LocalLastChangedAt
+authorization master ( global, instance )
+
 {
   create ( authorization : global );
   update;
   delete;
-  field ( readonly ) IncUuid;
+  field ( numbering : managed,  readonly ) IncUuid;
   association _HistoryIncidents { create; }
+
+  field( readonly ) IncidentId,
+                    Status,
+                    LocalCreatedBy,
+                    LocalCreatedAt,
+                    LocalLastChangedBy,
+                    LocalLastChangedAt,
+                    LastChangedAt;
+
+  field ( mandatory)   Title, Description, Priority;
+                       // CreationDate,  ChangedDate;
+
+  action (authorization: update ) changeStatus
+          parameter Z_ABST_STATUS_OBSE_073 result [1] $self;
+
+  internal action reActStatusObservation;
 
   mapping for zdt_inct_user073
     {
@@ -41,8 +59,14 @@ authorization dependent by _IncidentsMain
 {
   update;
   delete;
-  field ( readonly ) HisUuid, IncUuid;
   association _IncidentsMain;
+
+   field ( numbering : managed,  readonly ) HisUuid;
+
+   field( readonly ) IncUuid, HisId, PreviousStatus, Text,
+                     LocalCreatedBy, LocalCreatedAt,  LocalLastChangedBy,
+                     LocalLastChangedAt,  LastChangedAt;
+
 
   mapping for zdt_inct_h_073
     {
