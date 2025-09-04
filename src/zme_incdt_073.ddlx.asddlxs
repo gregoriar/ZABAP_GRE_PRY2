@@ -26,7 +26,7 @@ annotate entity ZC_DT_INCDT_073 with
                   type:#LINEITEM_REFERENCE,
                   label: 'History Incident(s)',
                   position: 20,
-                  targetElement:'_HistoryIncidents' }]
+                  targetElement:'_HistoryIncidents' }]  //To display the Incident History Detail UI
                   
   @UI.hidden: true
   IncUuid;

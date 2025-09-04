@@ -12,11 +12,13 @@ authorization master ( global, instance )
   create ( authorization : global );
   update;
   delete;
+
   field ( numbering : managed,  readonly ) IncUuid;
+
   association _HistoryIncidents { create; }
 
   field( readonly ) IncidentId,
-                    Status,
+                    //Status,
                     LocalCreatedBy,
                     LocalCreatedAt,
                     LocalLastChangedBy,
@@ -26,10 +28,23 @@ authorization master ( global, instance )
   field ( mandatory)   Title, Description, Priority;
                        // CreationDate,  ChangedDate;
 
-  action (authorization: update ) changeStatus
-          parameter Z_ABST_STATUS_OBSE_073 result [1] $self;
 
-  internal action reActStatusObservation;
+
+  field ( features  : instance ) Status; //Cambio de estado generará un metodo get_instance_features
+
+ // action ( authorization : update ) changeStatus result [1] $self;
+
+  action ( features : instance, authorization: update ) changeStatus
+           parameter Z_ABST_STATUS_OBSE_073 result [1] $self;
+
+  internal action reActStatusObservationHis;  //ES setDefaultHistory
+
+  //validation
+  //Priority Validation and Dates Validations
+
+   validation validatePriority on save {create; field Priority; }     //Rev. in my App RAP. Se disparan las validaciones tanto en el evento de creacion como de guardado
+   validation validateDates    on save {create; field CreationDate, ChangedDate; } //Rev. in my App RAP
+
 
   mapping for zdt_inct_user073
     {
