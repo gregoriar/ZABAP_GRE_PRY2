@@ -1,10 +1,12 @@
 managed implementation in class zbp_r_dt_inct_073 unique;
 strict ( 2 ); //Asegura que el código cumple con la versión 2 del BDL (Behavior Definition Language)
+with draft;
 
 define behavior for ZR_DT_INCT_073 alias Incidents //alias <alias_name>
 persistent table zdt_inct_user073
+draft table  zdt_inct_d_073
 lock master
-//total etag LastChangedAt
+total etag LastChangedAt
 etag master LocalLastChangedAt
 authorization master ( global, instance )
 
@@ -45,6 +47,27 @@ authorization master ( global, instance )
    validation validatePriority on save {create; field Priority; }     //Rev. in my App RAP. Se disparan las validaciones tanto en el evento de creacion como de guardado
    validation validateDates    on save {create; field CreationDate, ChangedDate; } //Rev. in my App RAP
 
+   determination setDefaultValuesInct on modify { create; } //Se dispara al momento de grabar un nuevo registro cuando se está creando y lo gyardamos
+                                                            //Se asignan los valores iniciales como el IncidentID,  Status y la fecha de creación de la incidencia
+   determination setdefaulthistory on save { create; }      // Se registran los valores en el Histórico
+
+   determine action validatePriorityID { validation validatePriority; }
+   determine action validateDatesFE { validation validateDates; }
+
+   side effects { //field status affects field   //Cómo plantear la actualización de la vista dependiente
+           determine action validatePriorityID executed on field Priority affects messages;
+           determine action validateDatesFE executed on field creationDate, field ChangedDate affects messages;	
+}
+
+  draft action Resume;
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+
+  draft determine action Prepare {
+    validation validatePriority;
+    validation validateDates;
+  }
 
   mapping for zdt_inct_user073
     {
@@ -68,6 +91,8 @@ authorization master ( global, instance )
 // Behavior Definition for ZDD_INCT_H_073
 define behavior for ZDD_INCT_H_073 alias HistoryIncidents //alias <alias_name>
 persistent table zdt_inct_h_073
+draft table  zdt_inct_h_d_073
+//lock master
 lock dependent by  _IncidentsMain
 authorization dependent by _IncidentsMain
 //etag master <field_name>
@@ -82,6 +107,11 @@ authorization dependent by _IncidentsMain
                      LocalCreatedBy, LocalCreatedAt,  LocalLastChangedBy,
                      LocalLastChangedAt,  LastChangedAt;
 
+
+//  draft action Resume;
+//  draft action Edit;
+//  draft action Activate optimized;
+//  draft action Discard;
 
   mapping for zdt_inct_h_073
     {

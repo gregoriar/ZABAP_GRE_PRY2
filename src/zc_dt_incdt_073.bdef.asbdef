@@ -1,0 +1,30 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZC_DT_INCDT_073 alias Incidents //alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+
+  use action changeStatus;
+  use action validatePriorityID;
+  use action validateDatesFE;
+
+  use action Resume;
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Prepare;
+
+  use association _HistoryIncidents { create; }
+}
+
+define behavior for ZC_DT_INCDT2_H_073 //alias <alias_name>
+{
+  //use update;
+  //use delete;
+
+  use association _IncidentsMain;
+}

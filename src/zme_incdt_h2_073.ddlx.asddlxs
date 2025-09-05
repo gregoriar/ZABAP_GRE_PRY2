@@ -4,61 +4,62 @@
                       typeNamePlural: 'History',
                       title: { type: #STANDARD,
                                value: 'HisUuid' } },
-                               
+      // createHidden : true,   //Deshabilitación de la vista de Creación en el Historial
+
       presentationVariant: [ {  sortOrder: [ { by: 'HisUuid',
                                                direction: #ASC } ],
-                                visualizations: [ { type: #AS_LINEITEM  } ]  } ]
+                                visualizations: [ { type: #AS_LINEITEM } ]  } ]
 
 }
 
 annotate entity ZC_DT_INCDT2_H_073 with
-    
+
 {
   @UI.facet: [{ id: 'IncidentMasterData',
-                purpose:#STANDARD, 
+                purpose:#STANDARD,
                 type:#LINEITEM_REFERENCE ,
-                label: 'History' ,                   
+                label: 'History' ,
                 position: 10 }]
-           //   targetElement: '_HistoryIncidents' }]  
+           //   targetElement: '_HistoryIncidents' }]
   @UI.hidden: true
-      HisUuid;
+  HisUuid;
 
-    @UI: { lineItem: [{ position: 10,
-                   importance: #HIGH,
-                   label: 'Incident ID' }] }
-          
-   IncUuid;
+  @UI: { lineItem: [{ position: 10,
+                 importance: #HIGH,
+                 label: 'Incident ID' }] }
 
-   @UI: { lineItem: [{ position: 20,
-                   importance: #HIGH,
-                   label: 'His Incdt.' }], 
-           selectionField: [ { position:20 } ]         } 
-    HisId;
- 
-    @UI: { lineItem: [{ position: 30,
-                   importance: #MEDIUM,
-                   label: 'Status Prev.' }] }     
-      PreviousStatus;
- 
-    @UI: { lineItem: [{ position: 40,
-                   importance: #MEDIUM,
-                   label: 'New Status' }] }       
-      NewStatus;
+  IncUuid;
 
-     @UI: { lineItem: [{ position: 40,
-                   importance: #MEDIUM,
-                   label: 'Text .' }] }       
-     Text;
+  @UI: { lineItem: [{ position: 20,
+                  importance: #HIGH,
+                  label: 'His Incdt.' }],
+          selectionField: [ { position:20 } ]         }
+  HisId;
+
+  @UI: { lineItem: [{ position: 30,
+                 importance: #MEDIUM,
+                 label: 'Status Prev.' }] }
+  PreviousStatus;
+
+  @UI: { lineItem: [{ position: 40,
+                 importance: #MEDIUM,
+                 label: 'New Status' }] }
+  NewStatus;
+
+  @UI: { lineItem: [{ position: 40,
+                importance: #MEDIUM,
+                label: 'Text .' }] }
+  Text;
 
 
- @UI.hidden: true
-     LastChangedAt;
-  @UI.hidden: true    
-        LocalLastChangedAt;
- 
-//      LocalCreatedBy;
-//      LocalCreatedAt;
-//      LocalLastChangedBy;
- 
-    
+  @UI.hidden: true
+  LastChangedAt;
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+  //      LocalCreatedBy;
+  //      LocalCreatedAt;
+  //      LocalLastChangedBy;
+
+
 }
