@@ -32,11 +32,13 @@ annotate entity ZC_DT_INCDT2_H_073 with
 
   @UI: { lineItem: [{ position: 20,
                   importance: #HIGH,
-                  label: 'His Incdt.' }],
+                 
+                  label: 'Incident. Number' }],
           selectionField: [ { position:20 } ]         }
   HisId;
 
   @UI: { lineItem: [{ position: 30,
+  
                  importance: #MEDIUM,
                  label: 'Status Prev.' }] }
   PreviousStatus;
@@ -48,7 +50,7 @@ annotate entity ZC_DT_INCDT2_H_073 with
 
   @UI: { lineItem: [{ position: 40,
                 importance: #MEDIUM,
-                label: 'Text .' }] }
+                label: 'Observation of Change' }] }
   Text;
 
 

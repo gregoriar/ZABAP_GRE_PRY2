@@ -38,7 +38,7 @@ annotate entity ZC_DT_INCDT_073 with
   //estos btns aparecen antes de los btns del estandard
                    { type: #FOR_ACTION,
                      dataAction: 'changeStatus',
-                      label: 'Chage Status',
+                      label: 'Change Status',
                       position: 10 }],
                   selectionField: [{ position: 10  }] ,
   //Definimos el btn Z en la sección del INDENTIFICATION_REFERENCE, i.e. en la sección de la ventana de
@@ -46,8 +46,10 @@ annotate entity ZC_DT_INCDT_073 with
                  identification: [ { position: 10 },
                      { type: #FOR_ACTION,
                      dataAction: 'changeStatus',
-                      label: 'Chage Status',
-                      position: 10 }] }
+                      label: 'Change Status',
+                      position: 10 } ] }
+                      
+                      
   IncidentId;
 
   @UI.lineItem: [{ position: 20,

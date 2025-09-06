@@ -6,7 +6,7 @@ define abstract entity Z_ABST_STATUS_OBSE_073
     @EndUserText.label: 'Enter New Status:'
     new_status : zde_status_code_073;
     
-     @EndUserText.label: 'Enter observation for history: '
-     observacion: zde_hist_text_073;
+    @EndUserText.label: 'Enter observation for history: '
+    observacion: zde_hist_text_073;
      
 }

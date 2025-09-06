@@ -5,7 +5,7 @@ with draft;
 define behavior for ZR_DT_INCT_073 alias Incidents //alias <alias_name>
 //implementation in class zbp_r_dt_inct_073 unique //Si quisieramos manejar una clase de implementación por cada entidad
 persistent table zdt_inct_user073
-draft table  zdt_inct_d_073
+draft table zdt_inct_d_073
 lock master
 total etag LastChangedAt
 etag master LocalLastChangedAt
@@ -18,56 +18,58 @@ authorization master ( global, instance )
 
   association _HistoryIncidents { create; }
 
-  field ( numbering : managed,  readonly ) IncUuid;
+  field ( numbering : managed, readonly ) IncUuid;
 
-  field( readonly ) IncidentId,
-                    //Status,
-                    LocalCreatedBy,
-                    LocalCreatedAt,
-                    LocalLastChangedBy,
-                    LocalLastChangedAt,
-                    LastChangedAt;
+  field ( readonly ) IncidentId,
+  //Status,
+  LocalCreatedBy,
+  LocalCreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
 
-  field ( mandatory)   Title, Description, Priority;
-                       // CreationDate,  ChangedDate;
+  field ( mandatory ) Title, Description, Priority;
+  // CreationDate,  ChangedDate;
 
 
 
-  field ( features  : instance ) Status; //Cambio de estado generará un metodo get_instance_features
+  field ( features : instance ) Status; //Cambio de estado generará un metodo get_instance_features
 
- // action ( authorization : update ) changeStatus result [1] $self;
+  // action ( authorization : update ) changeStatus result [1] $self;
 
-  action ( features : instance, authorization: update ) changeStatus
-           parameter Z_ABST_STATUS_OBSE_073 result [1] $self;
+  action ( features : instance, authorization : update ) changeStatus
+    parameter Z_ABST_STATUS_OBSE_073 result [1] $self;
 
   internal action reActStatusObservationHis;  //ES setDefaultHistory
 
   //validation
   //Priority Validation and Dates Validations
 
-   validation validatePriority on save {create; field Priority; }     //Rev. in my App RAP. Se disparan las validaciones tanto en el evento de creacion como de guardado
-   validation validateDates    on save {create; field CreationDate, ChangedDate; } //Rev. in my App RAP
+  validation validatePriority on save { create; field Priority; }     //Rev. in my App RAP. Se disparan las validaciones tanto en el evento de creacion como de guardado
+  validation validateDates on save { create; field CreationDate, ChangedDate; } //Rev. in my App RAP
 
   // determination setDefaultValuesInct on save { create; } //Se dispara al momento de grabar un nuevo registro cuando se está creando y lo gyardamos
-                                                            //Se asignan los valores iniciales como el IncidentID,  Status y la fecha de creación de la incidencia
+  //Se asignan los valores iniciales como el IncidentID,  Status y la fecha de creación de la incidencia
 
-   determination setDefaultValuesInct on modify { create; } //PRUEBA
-   determination setdefaulthistory on save { create; }      // Se registran los valores en el Histórico
+  determination setDefaultValuesInct on modify { create; } //PRUEBA
+  determination setdefaulthistory on save { create; }      // Se registran los valores en el Histórico
 
-   determine action validatePriorityID { validation validatePriority; }
-   determine action validateDatesFE { validation validateDates; }
+  determine action validatePriorityID { validation validatePriority; }
+  determine action validateDatesFE { validation validateDates; }
 
-   side effects { //field status affects field   //Cómo plantear la actualización de la vista dependiente
-           determine action validatePriorityID executed on field Priority affects messages;
-           determine action validateDatesFE executed on field creationDate, field ChangedDate affects messages;	
-    }
+  side effects
+  { //field status affects field   //Cómo plantear la actualización de la vista dependiente
+    determine action validatePriorityID executed on field Priority affects messages;
+    determine action validateDatesFE executed on field creationDate, field ChangedDate affects messages;
+  }
 
   draft action Resume;
   draft action Edit;
   draft action Activate optimized;
   draft action Discard;
 
-  draft determine action Prepare {
+  draft determine action Prepare
+  {
     validation validatePriority;
     validation validateDates;
   }
@@ -94,9 +96,9 @@ authorization master ( global, instance )
 // Behavior Definition for ZDD_INCT_H_073
 define behavior for ZDD_INCT_H_073 alias HistoryIncidents //alias <alias_name>
 persistent table zdt_inct_h_073
-draft table  zdt_inct_h_d_073
+draft table zdt_inct_h_d_073
 //lock master
-lock dependent by  _IncidentsMain
+lock dependent by _IncidentsMain
 authorization dependent by _IncidentsMain
 //etag master <field_name>
 {
@@ -104,17 +106,17 @@ authorization dependent by _IncidentsMain
   delete;
   association _IncidentsMain;
 
-   field ( numbering : managed,  readonly ) HisUuid;
+  field ( numbering : managed, readonly ) HisUuid;
 
-   field( readonly ) IncUuid, HisId, PreviousStatus, Text,
-                     LocalCreatedBy, LocalCreatedAt,  LocalLastChangedBy,
-                     LocalLastChangedAt,  LastChangedAt;
+  field ( readonly ) IncUuid, HisId, PreviousStatus, Text,
+  LocalCreatedBy, LocalCreatedAt, LocalLastChangedBy,
+  LocalLastChangedAt, LastChangedAt;
 
 
-//  draft action Resume;
-//  draft action Edit;
-//  draft action Activate optimized;
-//  draft action Discard;
+  //  draft action Resume;
+  //  draft action Edit;
+  //  draft action Activate optimized;
+  //  draft action Discard;
 
   mapping for zdt_inct_h_073
     {

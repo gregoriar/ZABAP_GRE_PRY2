@@ -70,12 +70,13 @@ CLASS lhc_Incidents IMPLEMENTATION.
   METHOD validateDates.
   ENDMETHOD.
 
-  METHOD validatePriority.
-      READ ENTITIES OF ZR_DT_INCT_073  IN LOCAL MODE
-       ENTITY  Incidents
-       FIELDS ( Priority )
-       WITH CORRESPONDING #( keys )
-       RESULT DATA(incidents2).  "//"**ERA travels
+  METHOD validatePriority.   "Probado en UI 06/09/25
+
+    READ ENTITIES OF zr_dt_inct_073  IN LOCAL MODE
+     ENTITY  Incidents
+     FIELDS ( Priority )
+     WITH CORRESPONDING #( keys )
+     RESULT DATA(incidents2).  "//"**ERA travels
 
     DATA priorities  TYPE SORTED TABLE OF zdt_priority_073  WITH UNIQUE KEY client priority_code.
     priorities = CORRESPONDING #( incidents2 DISCARDING DUPLICATES MAPPING priority_code =  Priority EXCEPT * ).
@@ -95,7 +96,7 @@ CLASS lhc_Incidents IMPLEMENTATION.
 
         APPEND VALUE #( %tky        = incident2-%tky
                         %state_area = 'VALIDATE_PRIORITY'
-                        %msg        = NEW /dmo/cm_flight_messages(  textid  = /dmo/cm_flight_messages=>enter_agency_id
+                        %msg        = NEW /dmo/cm_flight_messages(  textid  = /dmo/cm_flight_messages=>enter_agency_id  "OJO actualizar clase de MSG
                                                                 severity = if_abap_behv_message=>severity-error )
                        %element-Priority  = if_abap_behv=>mk-on
                               )  TO reported-Incidents.
