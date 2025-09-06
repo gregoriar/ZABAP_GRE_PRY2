@@ -3,6 +3,7 @@ strict ( 2 ); //Asegura que el código cumple con la versión 2 del BDL (Behavio
 with draft;
 
 define behavior for ZR_DT_INCT_073 alias Incidents //alias <alias_name>
+//implementation in class zbp_r_dt_inct_073 unique //Si quisieramos manejar una clase de implementación por cada entidad
 persistent table zdt_inct_user073
 draft table  zdt_inct_d_073
 lock master
@@ -15,9 +16,9 @@ authorization master ( global, instance )
   update;
   delete;
 
-  field ( numbering : managed,  readonly ) IncUuid;
-
   association _HistoryIncidents { create; }
+
+  field ( numbering : managed,  readonly ) IncUuid;
 
   field( readonly ) IncidentId,
                     //Status,
@@ -47,8 +48,10 @@ authorization master ( global, instance )
    validation validatePriority on save {create; field Priority; }     //Rev. in my App RAP. Se disparan las validaciones tanto en el evento de creacion como de guardado
    validation validateDates    on save {create; field CreationDate, ChangedDate; } //Rev. in my App RAP
 
-   determination setDefaultValuesInct on modify { create; } //Se dispara al momento de grabar un nuevo registro cuando se está creando y lo gyardamos
+  // determination setDefaultValuesInct on save { create; } //Se dispara al momento de grabar un nuevo registro cuando se está creando y lo gyardamos
                                                             //Se asignan los valores iniciales como el IncidentID,  Status y la fecha de creación de la incidencia
+
+   determination setDefaultValuesInct on modify { create; } //PRUEBA
    determination setdefaulthistory on save { create; }      // Se registran los valores en el Histórico
 
    determine action validatePriorityID { validation validatePriority; }
@@ -57,7 +60,7 @@ authorization master ( global, instance )
    side effects { //field status affects field   //Cómo plantear la actualización de la vista dependiente
            determine action validatePriorityID executed on field Priority affects messages;
            determine action validateDatesFE executed on field creationDate, field ChangedDate affects messages;	
-}
+    }
 
   draft action Resume;
   draft action Edit;
@@ -84,9 +87,9 @@ authorization master ( global, instance )
       LocalLastChangedBy = local_last_changed_by;
       LocalLastChangedAt = local_last_changed_at;
       LastChangedAt      = last_changed_at;
-    }
+    } //Mapeo de la tabla zdt_inct_user073
 
-} //Mapeo de la tabla zdt_inct_user073
+}
 
 // Behavior Definition for ZDD_INCT_H_073
 define behavior for ZDD_INCT_H_073 alias HistoryIncidents //alias <alias_name>

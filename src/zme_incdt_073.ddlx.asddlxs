@@ -51,6 +51,7 @@ annotate entity ZC_DT_INCDT_073 with
   IncidentId;
 
   @UI.lineItem: [{ position: 20,
+                   label: 'Incident Title',
                    importance: #MEDIUM }]
   @UI.identification: [ { position: 20 }]
 
@@ -58,6 +59,7 @@ annotate entity ZC_DT_INCDT_073 with
   Title;
 
   @UI: { lineItem: [{ position: 30,
+                    label: 'Description',
                    importance: #LOW}],
          selectionField: [{ position: 20  }],
          identification: [ { position: 30 } ]   }
@@ -67,6 +69,7 @@ annotate entity ZC_DT_INCDT_073 with
                                                  element: 'StatusCode' } }]
                                           //       useForValidation: true
   @UI: {  lineItem: [{ position: 40,
+                    label: 'Status',
                    importance: #LOW }],
          selectionField: [{ position: 30  }],
          identification: [ { position: 40 } ]   }
@@ -77,18 +80,21 @@ annotate entity ZC_DT_INCDT_073 with
                                                  element: 'PriorityCode' } ,
                                                  useForValidation: true }]
   @UI: { lineItem: [{ position: 50,
+                   label: 'Priority',
                    importance: #LOW }],
          selectionField: [{ position: 40  }],
          identification: [ { position: 50 } ]   }
   Priority;
 
   @UI: { lineItem: [{ position: 60,
+                   label: 'Incident Creation Date',
                   importance: #LOW}],
         selectionField: [{ position: 50  }],
         identification: [ { position: 60 } ]   }
   CreationDate;
 
   @UI: { lineItem: [{ position: 70,
+                  label: 'Incident Update Date',
                   importance: #LOW}],
         selectionField: [{ position: 60  }],
         identification: [ { position: 70 } ]   }
