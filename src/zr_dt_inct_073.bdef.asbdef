@@ -16,7 +16,7 @@ authorization master ( global, instance )
   update;
   delete;
 
-  association _HistoryIncidents { create; }
+  association _HistoryIncidents { create ( features: instance ); with draft; }
 
   field ( numbering : managed, readonly ) IncUuid;
 
@@ -104,7 +104,7 @@ authorization dependent by _IncidentsMain
 {
   update;
   delete;
-  association _IncidentsMain;
+  association _IncidentsMain { with draft; }
 
   field ( numbering : managed, readonly ) HisUuid;
 
@@ -113,10 +113,10 @@ authorization dependent by _IncidentsMain
   LocalLastChangedAt, LastChangedAt;
 
 
-  //  draft action Resume;
-  //  draft action Edit;
-  //  draft action Activate optimized;
-  //  draft action Discard;
+//    draft action Resume;
+//    draft action Edit;
+//    draft action Activate optimized;
+//    draft action Discard;
 
   mapping for zdt_inct_h_073
     {

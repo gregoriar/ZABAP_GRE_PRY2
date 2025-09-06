@@ -29,9 +29,7 @@ annotate entity ZC_DT_INCDT_073 with
                   targetElement:'_HistoryIncidents' }]  //To display the Incident History Detail UI
                   
   @UI.hidden: true
-  IncUuid;
-
-  @UI: { lineItem: [{ position: 10,
+   @UI: { lineItem: [{ position: 10,
                    importance: #HIGH,
                    label: 'Incident ID' },
   //En esta sección del lineItem  se definen los btns que aparecen antes del encabezados de las columnas
@@ -48,58 +46,65 @@ annotate entity ZC_DT_INCDT_073 with
                      dataAction: 'changeStatus',
                       label: 'Change Status',
                       position: 10 } ] }
+
+  IncUuid;
+
+  @UI: {lineItem: [{ position: 20,
+               importance: #MEDIUM }],
+  identification: [{ position: 20  } ],
+  selectionField: [{ position: 20 }]}
                       
                       
   IncidentId;
-
-  @UI.lineItem: [{ position: 20,
+  @UI.lineItem: [{ position: 30,
                    label: 'Incident Title',
                    importance: #MEDIUM }]
-  @UI.identification: [ { position: 20 }]
+  @UI.identification: [ { position: 30 } ]
+  @UI.selectionField: [{ position: 30 }] 
 
   //         label: 'Incident ID' }]
   Title;
 
-  @UI: { lineItem: [{ position: 30,
+  @UI: { lineItem: [{ position: 40,
                     label: 'Description',
                    importance: #LOW}],
-         selectionField: [{ position: 20  }],
-         identification: [ { position: 30 } ]   }
+         selectionField: [{ position: 40  }],
+         identification: [ { position: 40 } ]   }
   Description;
 
   @Consumption.valueHelpDefinition: [{ entity: { name: 'ZDD_STATUS2_VH_073',
                                                  element: 'StatusCode' } }]
                                           //       useForValidation: true
-  @UI: {  lineItem: [{ position: 40,
+  @UI: {  lineItem: [{ position: 50,
                     label: 'Status',
                    importance: #LOW }],
-         selectionField: [{ position: 30  }],
-         identification: [ { position: 40 } ]   }
+         selectionField: [{ position: 40  }],
+         identification: [ { position: 50 } ]   }
   //         textArrangement:#TEXT_ONLY  }
   Status;
 
   @Consumption.valueHelpDefinition: [{ entity: { name: 'ZDD_PRIORI_VH_073',
                                                  element: 'PriorityCode' } ,
                                                  useForValidation: true }]
-  @UI: { lineItem: [{ position: 50,
+  @UI: { lineItem: [{ position: 60,
                    label: 'Priority',
                    importance: #LOW }],
-         selectionField: [{ position: 40  }],
-         identification: [ { position: 50 } ]   }
+         selectionField: [{ position: 50  }],
+         identification: [ { position: 60 } ]   }
   Priority;
 
-  @UI: { lineItem: [{ position: 60,
-                   label: 'Incident Creation Date',
-                  importance: #LOW}],
-        selectionField: [{ position: 50  }],
-        identification: [ { position: 60 } ]   }
-  CreationDate;
-
   @UI: { lineItem: [{ position: 70,
-                  label: 'Incident Update Date',
+                   label: 'Incident Creation Date',
                   importance: #LOW}],
         selectionField: [{ position: 60  }],
         identification: [ { position: 70 } ]   }
+  CreationDate;
+
+  @UI: { lineItem: [{ position: 80,
+                  label: 'Incident Update Date',
+                  importance: #LOW}],
+        selectionField: [{ position: 70  }],
+        identification: [ { position: 80 } ]   }
   ChangedDate;
 
 
@@ -110,7 +115,8 @@ annotate entity ZC_DT_INCDT_073 with
 
 
   //      /* Associations */
-  //      _History : redirected to composition child zc_dt_inct_h_lgl
+  @UI.hidden: true
+    _HistoryIncidents;     //  composition child zc_dt_inct_h_lgl
 
 
 
