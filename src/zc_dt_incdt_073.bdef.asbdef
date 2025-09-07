@@ -19,6 +19,7 @@ define behavior for ZC_DT_INCDT_073 alias Incidents //alias <alias_name>
   use action Prepare;
 
   use association _HistoryIncidents { create; }
+
 }
 
 define behavior for ZC_DT_INCDT2_H_073 //alias <alias_name>

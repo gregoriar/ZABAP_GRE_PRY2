@@ -12,7 +12,8 @@ etag master LocalLastChangedAt
 authorization master ( global, instance )
 
 {
-  create ( authorization : global );
+  //create ( authorization : global );
+  create;
   update;
   delete;
 
@@ -94,6 +95,7 @@ authorization master ( global, instance )
 }
 
 // Behavior Definition for ZDD_INCT_H_073
+
 define behavior for ZDD_INCT_H_073 alias HistoryIncidents //alias <alias_name>
 persistent table zdt_inct_h_073
 draft table zdt_inct_h_d_073
