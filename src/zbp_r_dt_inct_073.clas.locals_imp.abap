@@ -96,7 +96,7 @@ CLASS lhc_Incidents IMPLEMENTATION.
 
         APPEND VALUE #( %tky        = incident2-%tky
                         %state_area = 'VALIDATE_PRIORITY'
-                        %msg        = NEW /dmo/cm_flight_messages(  textid  = /dmo/cm_flight_messages=>enter_agency_id  "OJO actualizar clase de MSG
+                        %msg        = NEW zcl_incd_message_073(  textid  = zcl_incd_message_073=>enter_priority_code   "Clase manejadora de mensajes
                                                                 severity = if_abap_behv_message=>severity-error )
                        %element-Priority  = if_abap_behv=>mk-on
                               )  TO reported-Incidents.
@@ -107,10 +107,8 @@ CLASS lhc_Incidents IMPLEMENTATION.
 
         APPEND VALUE #( %tky        = incident2-%tky
                         %state_area = 'VALIDATE_PRIORITY'
-                        %msg        = NEW /dmo/cm_flight_messages(  textid    = /dmo/cm_flight_messages=>agency_unkown
-                                                         "   priority_code = incident2-Priority  "Se debe ajustar con la clase de mensajes
-                                                         "    agency_id = travel-AgencyID
-                                                            severity   = if_abap_behv_message=>severity-error )
+                        %msg        = NEW zcl_incd_message_073(  textid    = zcl_incd_message_073=>priority_unkown
+                                                                severity   = if_abap_behv_message=>severity-error )
                            %element-Priority  = if_abap_behv=>mk-on
                                    )  TO reported-Incidents.
 

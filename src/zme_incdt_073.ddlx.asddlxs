@@ -84,8 +84,8 @@ annotate entity ZC_DT_INCDT_073 with
   Status;
 
   @Consumption.valueHelpDefinition: [{ entity: { name: 'ZDD_PRIORI_VH_073',
-                                                 element: 'PriorityCode' } ,
-                                                 useForValidation: true }]
+                                                 element: 'PriorityCode' } }]
+                                                // useForValidation: true }]
   @UI: { lineItem: [{ position: 60,
                    label: 'Priority',
                    importance: #LOW }],
