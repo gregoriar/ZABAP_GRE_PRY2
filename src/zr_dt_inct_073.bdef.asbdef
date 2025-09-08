@@ -47,7 +47,7 @@ authorization master ( global, instance )
   //Priority Validation  Validation
 
   validation validatePriority on save { create; field Priority; }     //Rev. in my App RAP. Se disparan las validaciones tanto en el evento de creacion como de guardado
-
+  validation validateDates  on save { create; field CreationDate,  ChangedDate; }
 
   // determination setDefaultValuesInct on save { create; } //Se dispara al momento de grabar un nuevo registro cuando se está creando y lo gyardamos
   //Se asignan los valores iniciales como el IncidentID,  Status y la fecha de creación de la incidencia
@@ -56,11 +56,12 @@ authorization master ( global, instance )
   determination setdefaulthistory on save { create; }      // Se registran los valores en el Histórico
 
   determine action validatePriorityID { validation validatePriority; }
-
+  determine action validateDatesFE { validation validateDates; }
 
   side effects
   { //field status affects field   //Cómo plantear la actualización de la vista dependiente
     determine action validatePriorityID executed on field Priority affects messages;
+    determine action validateDatesFE executed on field CreationDate, field ChangedDate affects messages;
 
   }
 
@@ -72,7 +73,7 @@ authorization master ( global, instance )
   draft determine action Prepare
   {
     validation validatePriority;
-//    validation validateDates;
+    validation validateDates;
   }
 
   mapping for zdt_inct_user073

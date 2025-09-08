@@ -40,23 +40,23 @@ CLASS zcl_incd_message_073 DEFINITION
         attr4 TYPE scx_attrname VALUE '',
       END OF priority_unkown,
 
-      BEGIN OF begin_date_bef_end_date,
+      BEGIN OF creat_date_bef_changed_date,
         msgid TYPE symsgid VALUE 'ZMC_INCD_MESSAGE_073',
         msgno TYPE symsgno VALUE '003',
-        attr1 TYPE scx_attrname VALUE 'MV_BEGIN_DATE',
-        attr2 TYPE scx_attrname VALUE 'MV_END_DATE',
+        attr1 TYPE scx_attrname VALUE 'MV_CREATION_DATE',
+        attr2 TYPE scx_attrname VALUE 'MV_CHANGED_DATE',
         attr3 TYPE scx_attrname VALUE '',
         attr4 TYPE scx_attrname VALUE '',
-      END OF begin_date_bef_end_date,
+      END OF creat_date_bef_changed_date,
 
-      BEGIN OF begin_date_on_or_bef_sysdate,
+      BEGIN OF creat_date_on_or_bef_sysdate,
         msgid TYPE symsgid VALUE 'ZMC_INCD_MESSAGE_073',
         msgno TYPE symsgno VALUE '004',
-        attr1 TYPE scx_attrname VALUE 'MV_BEGIN_DATE',
+        attr1 TYPE scx_attrname VALUE 'MV_CREATION_DATE',
         attr2 TYPE scx_attrname VALUE '',
         attr3 TYPE scx_attrname VALUE '',
         attr4 TYPE scx_attrname VALUE '',
-      END OF begin_date_on_or_bef_sysdate,
+      END OF creat_date_on_or_bef_sysdate,
 
       BEGIN OF discount_invalid,
         msgid TYPE symsgid VALUE 'ZMC_INCD_MESSAGE_073',
@@ -255,11 +255,11 @@ CLASS zcl_incd_message_073 DEFINITION
         carrier_id            TYPE /dmo/carrier-carrier_id OPTIONAL
         connection_id         TYPE /dmo/connection-connection_id OPTIONAL
         supplement_id         TYPE /dmo/supplement-supplement_id OPTIONAL
-        begin_date            TYPE /dmo/begin_date OPTIONAL
-        end_date              TYPE /dmo/end_date OPTIONAL
+        creation_date         TYPE zde_creation_date_inc_073 OPTIONAL
+        changed_date          TYPE zde_change_date_inc_073 OPTIONAL
         booking_date          TYPE /dmo/booking_date OPTIONAL
         flight_date           TYPE /dmo/flight_date OPTIONAL
-        status                TYPE zde_status2_lgl OPTIONAL
+        status                TYPE zde_status_code_073 OPTIONAL
         currency_code         TYPE /dmo/currency_code OPTIONAL
         severity              TYPE if_abap_behv_message=>t_severity OPTIONAL
         uname                 TYPE syuname OPTIONAL.
@@ -278,11 +278,11 @@ CLASS zcl_incd_message_073 DEFINITION
       mv_carrier_id            TYPE /dmo/carrier-carrier_id,
       mv_connection_id         TYPE /dmo/connection-connection_id,
       mv_supplement_id         TYPE /dmo/supplement-supplement_id,
-      mv_begin_date            TYPE /dmo/begin_date,
-      mv_end_date              TYPE /dmo/end_date,
+      mv_creation_date         TYPE zde_creation_date_inc_073,
+      mv_changed_date          TYPE zde_change_date_inc_073,
       mv_booking_date          TYPE /dmo/booking_date,
       mv_flight_date           TYPE /dmo/flight_date,
-      mv_status                TYPE zde_status2_lgl,
+      mv_status                TYPE zde_status_code_073,
       mv_currency_code         TYPE /dmo/currency_code,
       mv_uname                 TYPE syuname.
 
@@ -311,8 +311,8 @@ CLASS ZCL_INCD_MESSAGE_073 IMPLEMENTATION.
     me->mv_carrier_id            = carrier_id.
     me->mv_connection_id         = connection_id.
     me->mv_supplement_id         = supplement_id.
-    me->mv_begin_date            = begin_date.
-    me->mv_end_date              = end_date.
+    me->mv_creation_date         = creation_date.
+    me->mv_changed_date           = changed_date.
     me->mv_booking_date          = booking_date.
     me->mv_flight_date           = flight_date.
     me->mv_status                = status.

@@ -24,13 +24,13 @@
      <SPRSL>E</SPRSL>
      <ARBGB>ZMC_INCD_MESSAGE_073</ARBGB>
      <MSGNR>003</MSGNR>
-     <TEXT>Begin Date &amp;1 must not be after End Date &amp;2 .</TEXT>
+     <TEXT>Creation date &amp;1 must not be after Changed Date &amp;2 .</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>
      <ARBGB>ZMC_INCD_MESSAGE_073</ARBGB>
      <MSGNR>004</MSGNR>
-     <TEXT>Begin Date &amp;1 must be on or after system date.</TEXT>
+     <TEXT>Creation Date &amp;1 must be on or after system date.</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>

@@ -5,7 +5,7 @@
    <BDEF>
     <NAME>ZC_DT_INCDT_073</NAME>
     <TYPE>BDEF/BDO</TYPE>
-    <DESCRIPTION>Behavior Definition for Incident Consumption</DESCRIPTION>
+    <DESCRIPTION>Incident Consumption</DESCRIPTION>
     <DESCRIPTION_TEXT_LIMIT>60</DESCRIPTION_TEXT_LIMIT>
     <LANGUAGE>EN</LANGUAGE>
     <LINKS>
