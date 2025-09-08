@@ -34,8 +34,6 @@ CLASS lhc_Incidents DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS setdefaulthistory FOR DETERMINE ON SAVE
       IMPORTING keys FOR Incidents~setdefaulthistory.
 
-    METHODS validateDates FOR VALIDATE ON SAVE
-      IMPORTING keys FOR Incidents~validateDates.
 
     METHODS validatePriority FOR VALIDATE ON SAVE
       IMPORTING keys FOR Incidents~validatePriority.
@@ -67,26 +65,24 @@ CLASS lhc_Incidents IMPLEMENTATION.
   METHOD setdefaulthistory.
   ENDMETHOD.
 
-  METHOD validateDates.
-  ENDMETHOD.
 
-  METHOD validatePriority.   "Probado en UI 06/09/25
+METHOD validatePriority.   "Probado en UI 06/09/25
 
-    READ ENTITIES OF zr_dt_inct_073  IN LOCAL MODE
-     ENTITY  Incidents
-     FIELDS ( Priority )
-     WITH CORRESPONDING #( keys )
-     RESULT DATA(incidents2).  "//"**ERA travels
+  READ ENTITIES OF zr_dt_inct_073  IN LOCAL MODE
+   ENTITY  Incidents
+   FIELDS ( Priority )
+   WITH CORRESPONDING #( keys )
+   RESULT DATA(incidents2).  "//"**ERA travels
 
-    DATA priorities  TYPE SORTED TABLE OF zdt_priority_073  WITH UNIQUE KEY client priority_code.
-    priorities = CORRESPONDING #( incidents2 DISCARDING DUPLICATES MAPPING priority_code =  Priority EXCEPT * ).
-    DELETE priorities WHERE priority_code IS INITIAL.
+  DATA priorities  TYPE SORTED TABLE OF zdt_priority_073  WITH UNIQUE KEY client priority_code.
+  priorities = CORRESPONDING #( incidents2 DISCARDING DUPLICATES MAPPING priority_code =  Priority EXCEPT * ).
+  DELETE priorities WHERE priority_code IS INITIAL.
 
-    IF priorities IS NOT INITIAL.
-      SELECT FROM zdt_priority_073 AS ddbb
-         INNER JOIN @priorities AS http_req ON ddbb~priority_code EQ http_req~priority_code
-         FIELDS ddbb~priority_code
-         INTO TABLE @DATA(valid_priorities).
+  IF priorities IS NOT INITIAL.
+    SELECT FROM zdt_priority_073 AS ddbb
+       INNER JOIN @priorities AS http_req ON ddbb~priority_code EQ http_req~priority_code
+       FIELDS ddbb~priority_code
+       INTO TABLE @DATA(valid_priorities).
     ENDIF.
 
     LOOP AT incidents2 INTO DATA(incident2).
