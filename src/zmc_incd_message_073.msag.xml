@@ -48,13 +48,13 @@
      <SPRSL>E</SPRSL>
      <ARBGB>ZMC_INCD_MESSAGE_073</ARBGB>
      <MSGNR>007</MSGNR>
-     <TEXT>Enter a BeginDate.</TEXT>
+     <TEXT>Enter a CreationDate.</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>
      <ARBGB>ZMC_INCD_MESSAGE_073</ARBGB>
      <MSGNR>008</MSGNR>
-     <TEXT>Enter an EndDate.</TEXT>
+     <TEXT>Enter a ChangedDate.</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>
