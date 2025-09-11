@@ -1,8 +1,9 @@
 projection;
 strict ( 2 );
 use draft;
-
+use side effects;
 define behavior for ZC_DT_INCDT_073 //alias <alias_name>
+use etag
 {
   use create;
   use update;
@@ -10,7 +11,7 @@ define behavior for ZC_DT_INCDT_073 //alias <alias_name>
 
   use action changeStatus;
   use action validatePriorityID;
-  use action validateDatesFE;
+  //use action validateDatesFE;
 
   use action Resume;
   use action Edit;

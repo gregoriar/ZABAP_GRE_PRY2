@@ -53,22 +53,20 @@ annotate entity ZC_DT_INCDT_073 with
                importance: #MEDIUM }],
   identification: [{ position: 20  } ],
   selectionField: [{ position: 20 }]}
-                      
-                      
   IncidentId;
+  
   @UI.lineItem: [{ position: 30,
                    label: 'Incident Title',
                    importance: #MEDIUM }]
   @UI.identification: [ { position: 30 } ]
-  @UI.selectionField: [{ position: 30 }] 
-
+  //@UI.selectionField: [{ position: 30 }] 
   //         label: 'Incident ID' }]
   Title;
 
   @UI: { lineItem: [{ position: 40,
                     label: 'Description',
                    importance: #LOW}],
-         selectionField: [{ position: 40  }],
+         selectionField: [{ position: 30  }],
          identification: [ { position: 40 } ]   }
   Description;
 
@@ -78,7 +76,7 @@ annotate entity ZC_DT_INCDT_073 with
   @UI: {  lineItem: [{ position: 50,
                     label: 'Status',
                    importance: #LOW }],
-         selectionField: [{ position: 40  }],
+         selectionField: [{ position: 40 }],
          identification: [ { position: 50 } ]   }
   //         textArrangement:#TEXT_ONLY  }
   Status;

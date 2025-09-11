@@ -85,7 +85,7 @@ CLASS zcl_incd_message_073 DEFINITION
         attr4 TYPE scx_attrname VALUE '',
       END OF enter_changed_date,
 
-      BEGIN OF enter_priority_code,
+      BEGIN OF enter_priority_code,   "Ajustar validacion esta constante
         msgid TYPE symsgid VALUE 'ZMC_INCD_MESSAGE_073',
         msgno TYPE symsgno VALUE '009',
         attr1 TYPE scx_attrname VALUE 'MV_STATUS',

@@ -19,10 +19,14 @@ authorization master ( global, instance )
 
   association _HistoryIncidents { create ( features: instance ); with draft; }
 
-  field ( numbering : managed, readonly ) IncUuid;
+  //field ( numbering : managed, readonly ) IncUuid;
 
-  field ( readonly ) IncidentId,
-  //Status,
+ field ( numbering : managed ) IncUuid;   //En el Proy. Logali
+
+  field ( readonly )
+  IncUuid,
+  IncidentId,
+  Status,
   LocalCreatedBy,
   LocalCreatedAt,
   LocalLastChangedBy,
@@ -34,7 +38,7 @@ authorization master ( global, instance )
 
 
 
-  field ( features : instance ) Status; //Cambio de estado generará un metodo get_instance_features
+  //field ( features : instance ) Status; //Cambio de estado NO generará  O NO DEBE  metodo get_instance_features
 
   // action ( authorization : update ) changeStatus result [1] $self;
 
@@ -42,12 +46,13 @@ authorization master ( global, instance )
     parameter Z_ABST_STATUS_OBSE_073 result [1] $self;
 
   internal action reActStatusObservationHis;  //ES setDefaultHistory
+  internal action setHistory;
 
   //validation
   //Priority Validation  Validation
 
   validation validatePriority on save { create; field Priority; }     //Rev. in my App RAP. Se disparan las validaciones tanto en el evento de creacion como de guardado
-  validation validateDates  on save { create; field CreationDate,  ChangedDate; }
+ // validation validateDates  on save { create; field CreationDate,  ChangedDate; }
 
   // determination setDefaultValuesInct on save { create; } //Se dispara al momento de grabar un nuevo registro cuando se está creando y lo gyardamos
   //Se asignan los valores iniciales como el IncidentID,  Status y la fecha de creación de la incidencia
@@ -56,12 +61,13 @@ authorization master ( global, instance )
   determination setdefaulthistory on save { create; }      // Se registran los valores en el Histórico
 
   determine action validatePriorityID { validation validatePriority; }
-  determine action validateDatesFE { validation validateDates; }
+//  determine action validateDatesFE { validation validateDates; }
 
   side effects
-  { //field status affects field   //Cómo plantear la actualización de la vista dependiente
+  { //field status affects field _HistoryIncidents.NewStatus;  //Revisar plantear la actualización de la vista dependiente
+    action changeStatus affects $self;
     determine action validatePriorityID executed on field Priority affects messages;
-    determine action validateDatesFE executed on field CreationDate, field ChangedDate affects messages;
+ //   determine action validateDatesFE executed on field CreationDate, field ChangedDate affects messages;
 
   }
 
@@ -70,10 +76,11 @@ authorization master ( global, instance )
   draft action Activate optimized;
   draft action Discard;
 
+
   draft determine action Prepare
   {
     validation validatePriority;
-    validation validateDates;
+  //  validation validateDates;
   }
 
   mapping for zdt_inct_user073
