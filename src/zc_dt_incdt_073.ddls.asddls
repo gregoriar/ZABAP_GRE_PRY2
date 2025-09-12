@@ -10,9 +10,20 @@ define root view entity ZC_DT_INCDT_073
   as projection on ZR_DT_INCT_073
 {
   key IncUuid,
+ 
+ 
+      @Search.defaultSearchElement: true
+      @Search.fuzzinessThreshold: 0.8
+      @Search.ranking: #MEDIUM
+      @ObjectModel.text.element: [ 'IncidentId' ] 
       IncidentId,
+     
       Title,
-      Description,
+
+      @Search.defaultSearchElement: true
+      @Search.fuzzinessThreshold: 0.8
+      @Search.ranking: #MEDIUM
+      Description,   
 
       @Search.defaultSearchElement: true
       @Search.fuzzinessThreshold: 0.8
@@ -28,7 +39,11 @@ define root view entity ZC_DT_INCDT_073
       Priority,
       _Priority.priority_description as PriorityIncident,
 
+      @Search.defaultSearchElement: true
+      @Search.fuzzinessThreshold: 0.8
+      @Search.ranking: #MEDIUM
       CreationDate,
+      
       ChangedDate,
       LocalCreatedBy,
       LocalCreatedAt,

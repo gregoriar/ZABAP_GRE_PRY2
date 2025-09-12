@@ -21,5 +21,5 @@ define view entity ZDD_PRIORI_VH_073
       @Search.fuzzinessThreshold: 0.8
       @Semantics.text:true
       @UI.lineItem: [{ position: 20, importance: #HIGH }]     
-      priority_description as PriorityDescription
+     priority_description as PriorityDescription
 }

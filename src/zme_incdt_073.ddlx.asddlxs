@@ -20,49 +20,57 @@ annotate entity ZC_DT_INCDT_073 with
                 type: #IDENTIFICATION_REFERENCE,
                 label: 'Incident Master Data' ,
                 position: 10 },
-                
+
                 { id: 'History',
                   purpose: #STANDARD,
                   type:#LINEITEM_REFERENCE,
                   label: 'History Incident(s)',
                   position: 20,
                   targetElement:'_HistoryIncidents' }]  //To display the Incident History Detail UI
-                  
+
   @UI.hidden: true
-   @UI: { lineItem: [{ position: 10,
-                   importance: #HIGH,
-                   label: 'Incident ID' },
+  @UI: { lineItem: [{ position: 10,
+                  importance: #HIGH,
+                  label: 'Incident ID' },
   //En esta sección del lineItem  se definen los btns que aparecen antes del encabezados de las columnas
   //estos btns aparecen antes de los btns del estandard
-                   { type: #FOR_ACTION,
-                     dataAction: 'changeStatus',
-                      label: 'Change Status',
-                      position: 10 }],
-                  selectionField: [{ position: 10  }] ,
+                  { type: #FOR_ACTION,
+                    dataAction: 'changeStatus',
+                     label: 'Change Status',
+                     position: 10 }],
+                 selectionField: [{ position: 10  }] ,
   //Definimos el btn Z en la sección del INDENTIFICATION_REFERENCE, i.e. en la sección de la ventana de
   //edición del detalle de incidencias, este btn aparecerá despues de los bts del estandard CRUD
-                 identification: [ { position: 10 },
-                     { type: #FOR_ACTION,
-                     dataAction: 'changeStatus',
-                      label: 'Change Status',
-                      position: 10 } ] }
+                identification: [ { position: 10 },
+                    { type: #FOR_ACTION,
+                    dataAction: 'changeStatus',
+                     label: 'Change Status',
+                     position: 10 } ] }
 
   IncUuid;
+
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZDD_INCDT_VH_073',
+                                                 element: 'IncidentId' } }]
+                                              //   useForValidation: true }]
 
   @UI: {lineItem: [{ position: 20,
                importance: #MEDIUM }],
   identification: [{ position: 20  } ],
   selectionField: [{ position: 20 }]}
   IncidentId;
-  
+
   @UI.lineItem: [{ position: 30,
                    label: 'Incident Title',
                    importance: #MEDIUM }]
   @UI.identification: [ { position: 30 } ]
-  //@UI.selectionField: [{ position: 30 }] 
+  //@UI.selectionField: [{ position: 30 }]
   //         label: 'Incident ID' }]
   Title;
 
+
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZDD_INCDT_VH_073',
+                                               element: 'Description' } }]
+                                            //   useForValidation: true }]
   @UI: { lineItem: [{ position: 40,
                     label: 'Description',
                    importance: #LOW}],
@@ -72,7 +80,7 @@ annotate entity ZC_DT_INCDT_073 with
 
   @Consumption.valueHelpDefinition: [{ entity: { name: 'ZDD_STATUS2_VH_073',
                                                  element: 'StatusCode' } }]
-                                          //       useForValidation: true
+                                          //       useForValidation: true }]
   @UI: {  lineItem: [{ position: 50,
                     label: 'Status',
                    importance: #LOW }],
@@ -91,6 +99,9 @@ annotate entity ZC_DT_INCDT_073 with
          identification: [ { position: 60 } ]   }
   Priority;
 
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZDD_INCDT_VH_073',
+                                               element: 'CreationDate' } }]
+                                        //       useForValidation: true }]
   @UI: { lineItem: [{ position: 70,
                    label: 'Incident Creation Date',
                   importance: #LOW}],
@@ -101,7 +112,7 @@ annotate entity ZC_DT_INCDT_073 with
   @UI: { lineItem: [{ position: 80,
                   label: 'Incident Update Date',
                   importance: #LOW}],
-        selectionField: [{ position: 70  }],
+     //   selectionField: [{ position: 70  }],
         identification: [ { position: 80 } ]   }
   ChangedDate;
 
@@ -114,7 +125,7 @@ annotate entity ZC_DT_INCDT_073 with
 
   //      /* Associations */
   @UI.hidden: true
-    _HistoryIncidents;     //  composition child zc_dt_inct_h_lgl
+  _HistoryIncidents; //  composition child zc_dt_inct_h_lgl
 
 
 
