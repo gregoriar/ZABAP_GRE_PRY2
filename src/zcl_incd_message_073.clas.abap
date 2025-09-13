@@ -34,7 +34,7 @@ CLASS zcl_incd_message_073 DEFINITION
       BEGIN OF priority_unkown,
         msgid TYPE symsgid VALUE 'ZMC_INCD_MESSAGE_073',
         msgno TYPE symsgno VALUE '002',
-        attr1 TYPE scx_attrname VALUE 'MV_STATUS',
+        attr1 TYPE scx_attrname VALUE 'MV_PRIORITY_CODE',
         attr2 TYPE scx_attrname VALUE '',
         attr3 TYPE scx_attrname VALUE '',
         attr4 TYPE scx_attrname VALUE '',
@@ -88,7 +88,7 @@ CLASS zcl_incd_message_073 DEFINITION
       BEGIN OF enter_priority_code,   "Ajustar validacion esta constante
         msgid TYPE symsgid VALUE 'ZMC_INCD_MESSAGE_073',
         msgno TYPE symsgno VALUE '009',
-        attr1 TYPE scx_attrname VALUE 'MV_STATUS',
+        attr1 TYPE scx_attrname VALUE 'MV_PRIORITY_CODE',
         attr2 TYPE scx_attrname VALUE '',
         attr3 TYPE scx_attrname VALUE '',
         attr4 TYPE scx_attrname VALUE '',
@@ -184,14 +184,14 @@ CLASS zcl_incd_message_073 DEFINITION
         attr4 TYPE scx_attrname VALUE '',
       END OF not_authorized,
 
-      BEGIN OF not_authorized_for_agencyID,
+      BEGIN OF not_authorized_for_status,
         msgid TYPE symsgid VALUE 'ZMC_INCD_MESSAGE_073',
         msgno TYPE symsgno VALUE '021',
-        attr1 TYPE scx_attrname VALUE '',
+        attr1 TYPE scx_attrname VALUE 'MV_STATUS',
         attr2 TYPE scx_attrname VALUE '',
         attr3 TYPE scx_attrname VALUE '',
         attr4 TYPE scx_attrname VALUE '',
-      END OF not_authorized_for_agencyID,
+      END OF not_authorized_for_status,
 
       BEGIN OF currency_required,
         msgid TYPE symsgid VALUE 'ZMC_INCD_MESSAGE_073',
@@ -260,6 +260,7 @@ CLASS zcl_incd_message_073 DEFINITION
         booking_date          TYPE /dmo/booking_date OPTIONAL
         flight_date           TYPE /dmo/flight_date OPTIONAL
         status                TYPE zde_status_code_073 OPTIONAL
+        priority_code         TYPE zde_priority_code_073 OPTIONAL
         currency_code         TYPE /dmo/currency_code OPTIONAL
         severity              TYPE if_abap_behv_message=>t_severity OPTIONAL
         uname                 TYPE syuname OPTIONAL.

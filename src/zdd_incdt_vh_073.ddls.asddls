@@ -31,12 +31,14 @@ define view entity ZDD_INCDT_VH_073
          status      as Status,
          priority    as Priority,
          
+         creation_date as CreationDate,
+
          @Search.defaultSearchElement: true
          @UI.lineItem: [{ position: 60, importance: #HIGH }]
-         @ObjectModel.text.element:['CreationDate']        
-         creation_date as CreationDate
+         @ObjectModel.text.element:['LocalCreatedBy']  
+         local_created_by as LocalCreatedBy
+         
          //    changed_date as ChangedDate,
-        // local_created_by as LocalCreatedBy,
          //    local_created_at as LocalCreatedAt,
          //    local_last_changed_by as LocalLastChangedBy,
          //    local_last_changed_at as LocalLastChangedAt,

@@ -132,7 +132,7 @@
      <SPRSL>E</SPRSL>
      <ARBGB>ZMC_INCD_MESSAGE_073</ARBGB>
      <MSGNR>021</MSGNR>
-     <TEXT>You are not authorized to perform this activity.</TEXT>
+     <TEXT>You are not authorized to perform this activity with Status.</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>

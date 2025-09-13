@@ -44,8 +44,8 @@ CLASS lhc_Incidents DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS setHistory FOR MODIFY
       IMPORTING keys FOR ACTION Incidents~setHistory.
 
-   METHODS get_history_index EXPORTING ev_incuuid       TYPE sysuuid_x16
-                             RETURNING VALUE(rv_index)  TYPE zde_num_incident_073.
+    METHODS get_history_index EXPORTING ev_incuuid      TYPE sysuuid_x16
+                              RETURNING VALUE(rv_index) TYPE zde_num_incident_073.
 
 
 ENDCLASS.
@@ -128,6 +128,61 @@ CLASS lhc_Incidents IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD get_instance_authorizations.
+*    DATA: update_requested TYPE abap_bool,
+*          update_granted   TYPE abap_bool.
+*
+*** Determining the technical username
+*    DATA: lv_message_text TYPE string.
+*    lv_message_text = 'Unauthorized user'.
+*    DATA(lv_technical_name) = cl_abap_context_info=>get_user_technical_name(  ).
+*     lv_technical_name = 'OTHER USER'.
+*
+*    READ ENTITIES OF zr_dt_inct_073 IN LOCAL MODE
+*           ENTITY Incidents
+*            FIELDS ( Status )
+*            WITH CORRESPONDING #( keys )
+*            RESULT DATA(incidents_t)
+*           FAILED failed.
+*
+*
+*    update_requested = COND #( WHEN requested_authorizations-%update = if_abap_behv=>mk-on OR
+*                                   requested_authorizations-%action-Edit = if_abap_behv=>mk-on
+*
+*                              THEN abap_true
+*                              ELSE abap_false ).
+*
+*    CHECK update_requested EQ  abap_true.
+*
+*    LOOP AT incidents_t INTO DATA(incident_t).                " 70021.
+*      "  WHERE AgencyID IS NOT INITIAL.
+*
+*      IF incident_t-Status IS NOT INITIAL.
+*
+*        IF lv_technical_name EQ 'CB9980000073'.
+*          update_granted = abap_true.
+*        ELSE.
+*          update_granted = abap_false.
+*
+*          APPEND VALUE #( %tky = incident_t-%tky
+*                          %msg = NEW zcl_incd_message_073( textid    = zcl_incd_message_073=>not_authorized_for_status
+*                                                              status =  incident_t-Status
+*                                                              severity  = if_abap_behv_message=>severity-error )
+*                         %element-status = if_abap_behv=>mk-on                    )  TO reported-Incidents.
+*
+*        ENDIF.
+*
+*      ENDIF.
+*
+*      APPEND VALUE #( LET upd_auth = COND #( WHEN update_granted EQ abap_true
+*                                             THEN if_abap_behv=>auth-allowed
+*                                             ELSE if_abap_behv=>auth-unauthorized )
+*
+*
+*                       IN
+*                       %tky         = incident_t-%tky
+*                       %update      = upd_auth
+*                       %action-Edit = upd_auth ) TO result.
+*    ENDLOOP.
   ENDMETHOD.
 
   METHOD get_global_authorizations.
@@ -135,7 +190,7 @@ CLASS lhc_Incidents IMPLEMENTATION.
 
   METHOD changeStatus.
 
-  " Declaration of necessary variables
+    " Declaration of necessary variables
     DATA: lt_updated_root_entity TYPE TABLE FOR UPDATE zr_dt_inct_073,
           lt_association_entity  TYPE TABLE FOR CREATE zr_dt_inct_073\_HistoryIncidents,
           lv_status              TYPE zde_status_code_073,
@@ -147,13 +202,16 @@ CLASS lhc_Incidents IMPLEMENTATION.
           lv_wrong_status        TYPE zde_status_code_073.
 
 ** Iterate through the keys records to get parameters for validations
- "lt_updated_root_entity[ 1 ]
+    "lt_updated_root_entity[ 1 ]
 
     READ ENTITIES OF zr_dt_inct_073 IN LOCAL MODE
          ENTITY Incidents
          ALL FIELDS WITH CORRESPONDING #( keys )
          RESULT DATA(incidents_t)
          FAILED failed.
+
+**
+
 
 ** Get parameters
     LOOP AT incidents_t ASSIGNING FIELD-SYMBOL(<incident_t>).
@@ -228,9 +286,9 @@ CLASS lhc_Incidents IMPLEMENTATION.
                      Status )
     WITH lt_updated_root_entity.
 
-    free incidents_t.    " FREE incidents. " Free entries in incidents is incidents_t
+    FREE incidents_t.    " FREE incidents. " Free entries in incidents is incidents_t
 
-   "Updating the fields in the Incident History table GRE  OJO ESTO SE PIDE EN UN SIDE EFECT
+    "Updating the fields in the Incident History table GRE  OJO ESTO SE PIDE EN UN SIDE EFECT
     MODIFY ENTITIES OF zr_dt_inct_073 IN LOCAL MODE
      ENTITY Incidents
      CREATE BY \_HistoryIncidents FIELDS ( HisUUID
@@ -250,7 +308,7 @@ CLASS lhc_Incidents IMPLEMENTATION.
     ENTITY Incidents
     ALL FIELDS WITH CORRESPONDING #( keys )
     RESULT incidents_t.
-"OJO Revisar aqui
+    "OJO Revisar aqui
 ** Update User Interface
     result = VALUE #( FOR incident IN incidents_t ( %tky = incident-%tky
                                                    %param = incident ) ).
@@ -258,7 +316,7 @@ CLASS lhc_Incidents IMPLEMENTATION.
 
 
   "get_history_index
-    METHOD get_history_index.
+  METHOD get_history_index.
 ** Fill history data
     SELECT FROM zdt_inct_h_073
       FIELDS MAX( his_id ) AS max_his_id
