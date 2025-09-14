@@ -11,7 +11,7 @@ use etag
 
   use action changeStatus;
   use action validatePriorityID;
-  //use action validateDatesFE;
+  use action validateDatesFE;
 
   use action Resume;
   use action Edit;

@@ -114,7 +114,7 @@ annotate entity ZC_DT_INCDT_073 with
   ChangedDate;
 
   @Consumption.valueHelpDefinition: [{ entity: { name: 'ZDD_INCDT_VH_073',
-                                               element: 'LocalCreatedby' } }]
+                                               element: 'LocalCreatedBy' } }]
                                             //   useForValidation: true }]
   @UI: { lineItem: [{ position: 90,
                   label: 'Create By',
